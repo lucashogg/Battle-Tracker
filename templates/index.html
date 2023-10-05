@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block main %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Stocks</th>
+            <th>Shares</th>
+            <th>Current Price</th>
+            <th>Holdings</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- {% for data in user_list %}
+            <tr>
+                <td>{{ data.stock }}</td>
+                <td>{{ data.shares }}</td>
+                <td>{{ data.price | usd }}</td>
+                <td>{{ data.holding | usd }}</td>
+            </tr>
+            {% endfor %} -->
+    </tbody>
+</table>
+{% endblock %}

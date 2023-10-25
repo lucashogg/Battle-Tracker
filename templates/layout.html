@@ -35,7 +35,7 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/characters">Characters</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/add-remove">Add/Remove</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/add">Add</a></li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
@@ -50,20 +50,24 @@
         </div>
     </nav>
 
-    {% if get_flashed_messages() %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
     <header>
-        <div class="alert alert-primary mb-0 text-center" role="alert">
-            {{ get_flashed_messages() | join(" ") }}
+        {% for message in messages %}
+        <div class="alert alert-dark flashes mt-3 mx-auto text-center w-50" role="alert">
+            {{ message }}
         </div>
+        {% endfor %}
     </header>
     {% endif %}
+    {% endwith %}
 
     <main class="container-fluid py-5 text-center">
         {% block main %}{% endblock %}
     </main>
 
     <footer class="mb-5 small text-center text-muted">
-        Data provided by <a href="https://iexcloud.io/">Wizards of the Coast</a>
+        <!-- Data provided by <a href="https://iexcloud.io/">Wizards of the Coast</a> -->
     </footer>
 
     <!-- Bootstrap 5.3 JS -->

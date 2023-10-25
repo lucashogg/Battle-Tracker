@@ -5,6 +5,9 @@ Log In
 {% endblock %}
 
 {% block main %}
+{% if error %}
+<p class="error"><strong>Error:</strong> {{ error }}</p>
+{% endif %}
 <form action="/login" method="post">
     <div class="mb-3">
         <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username"

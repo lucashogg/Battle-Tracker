@@ -5,24 +5,111 @@ Home
 {% endblock %}
 
 {% block main %}
-<table class="table">
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+<h2 class="mb-3">Current Battle</h2>
+<div class="text-center mb-3">
+    <form action="/initiative" method="post">
+        <button class="btn btn-outline-light" name="initiative" type="submit">Roll For Initiative</button>
+    </form>
+</div>
+<div class="text-center mb-3 mx-auto w-50">
+    <form action="/" method="post">
+        <div class="input-group">
+            <label aria-label="Character select" for="char-select" class="form-label visually-hidden"
+                type="hidden"></label>
+            <select class="form-select" id="char-select" name="char-select">
+                <option selected>Select Character To Enter Battle</option>
+                {% for char in chars %}
+                <option value="{{ char.name }}">{{ char.name }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-outline-light" type="submit">Add</button>
+        </div>
+    </form>
+</div>
+<table class="table mb-3">
     <thead>
         <tr>
-            <th>Stocks</th>
-            <th>Shares</th>
-            <th>Current Price</th>
-            <th>Holdings</th>
+            <th>Initiative</th>
+            <th>Character</th>
+            <th>AC</th>
+            <th>Max HP</th>
+            <th>Current HP</th>
+            <th>Damage/Healing</th>
+            <th>Condition</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <!-- {% for data in user_list %}
+        {% for data in current_battle %}
+        <form action="/battle" method="post">
             <tr>
-                <td>{{ data.stock }}</td>
-                <td>{{ data.shares }}</td>
-                <td>{{ data.price }}</td>
-                <td>{{ data.holding }}</td>
+                <td>{{ data.initiative }}</td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.ac }}</td>
+                <td>{{ data.max_hp }}</td>
+                {% if data.current_hp == 0 %}
+                <td class="dead">
+                    {{ data.current_hp }}
+                </td>
+                {% else %}
+                <td>
+                    {{ data.current_hp }}
+                </td>
+                {% endif %}
+                <td>
+                    <div class="input-group input-group-sm">
+                        <input aria-label="Add damage or healing" class="form-control" id="damage" name="damage"
+                            type="number">
+                        <input name="currenthp" type="hidden" value="{{ data.name }}">
+                        <button class="btn btn-outline-light" name="battle" type="submit" value="damage">Submit</button>
+                    </div>
+                </td>
+                <td>{{ data.condition }}</td>
+                <td>
+                    <input aria-label="Delete current char" name="deletechar" type="hidden" value="{{ data.name }}">
+                    <button class="btn btn-outline-light" name="battle" type="submit" value="deletechar">X</button>
+                </td>
             </tr>
-            {% endfor %} -->
+        </form>
+        {% endfor %}
     </tbody>
 </table>
+<h3 class="mb-3">Add Condition To Character</h3>
+<div class="text-center mb-3 mx-auto w-50">
+    <form action="/condition" method="post">
+        <div class="mb-3">
+            <label aria-label="Character select" for="char-select" class="form-label visually-hidden"
+                type="hidden"></label>
+            <select class="form-select" id="char-select" name="char-select">
+                <option selected>Select Character</option>
+                {% for char in current_battle %}
+                <option value="{{ char.name }}">{{ char.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label aria-label="Condition select" for="condition" class="form-label visually-hidden"
+                type="hidden"></label>
+            <select class="form-select" id="condition" name="condition">
+                <option selected>Select Condition</option>
+                {% for data in cond %}
+                <option value="{{ data }}">{{ data }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-2">
+                    <button class="btn btn-outline-light" name="cond" type="submit" value="add">Add</button>
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-outline-light" name="cond" type="submit" value="remove">Remove</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock %}

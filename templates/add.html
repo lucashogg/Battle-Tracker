@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add
+{% endblock %}
+
+{% block main %}
+{% if error %}
+<p class="error"><strong>Error:</strong> {{ error }}</p>
+{% endif %}
+<h2 class="mb-3">Add A Character</h2>
+<div class="bg-dark mx-auto mb-3 p-2 rounded w-25">
+    All fields are required
+</div>
+<form action="/add" method="post">
+    <div class="mb-3">
+        <label for="charname" class="form-label">Character Name</label>
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="charname" name="charname"
+            placeholder="Drizzt Do'Urden" type="text">
+    </div>
+    <div class="mb-3">
+        <label for="armorclass" class="form-label">Armor Class</label>
+        <input class="form-control mx-auto w-auto" id="armorclass" name="armorclass" placeholder="16" type="number">
+    </div>
+    <div class="mb-3">
+        <label for="maxhp" class="form-label">Max HP</label>
+        <input class="form-control mx-auto w-auto" id="maxhp" name="maxhp" placeholder="87" type="number">
+    </div>
+    <div class="mb-3">
+        <label for="currenthp" class="form-label">Current HP</label>
+        <input class="form-control mx-auto w-auto" id="currenthp" name="currenthp" placeholder="87" type="number">
+    </div>
+    <div class="mb-3">
+        <label for="modifier" class="form-label">Modifier</label>
+        <input class="form-control mx-auto w-auto" id="modifier" name="modifier" placeholder="3" type="number">
+    </div>
+    <button class="btn btn-outline-light" type="submit">Add Character</button>
+</form>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Characters
+{% endblock %}
+
+{% block main %}
+{% if alert %}
+<div class="alert alert-success" role="alert">{{ alert }}</div>
+{% endif %}
+<h2 class="mb-3">View Or Edit Character</h2>
+<form action="/characters" method="post">
+    <div class="mb-3 mx-auto w-50">
+        <label for="char-select" class="form-label">Select Character</label>
+        <select class="form-select" id="char-select" name="char-select" onchange="this.form.submit()">
+            <option disabled selected></option>
+            {% for char in chars %}
+            <option value="{{ char.name }}">{{ char.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</form>
+{% for data in char %}
+{% if data %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Character</th>
+            <th>AC</th>
+            <th>Max HP</th>
+            <th>Current HP</th>
+            <th>Modifier</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ data.name }}</td>
+            <td>{{ data.ac }}</td>
+            <td>{{ data.max_hp }}</td>
+            <td>{{ data.current_hp }}</td>
+            <td>{{ data.modifier }}</td>
+            <td></td>
+        </tr>
+        <form action="/edit" method="post">
+            <tr>
+                <td>
+                    <input aria-label="Edit character name" autocomplete="off" class="form-control" id="charname"
+                        name="charname" placeholder="Edit name" type="text">
+                </td>
+                <td>
+                    <input aria-label="Edit armor class" class="form-control" id="armorclass" name="armorclass"
+                        placeholder="Edit AC" type="number">
+                </td>
+                <td>
+                    <input aria-label="Edit max hp" class="form-control" id="maxhp" name="maxhp"
+                        placeholder="Edit max hp" type="number">
+                </td>
+                <td>
+                    <input aria-label="Edit current hp" class="form-control" id="currenthp" name="currenthp"
+                        placeholder="Edit current hp" type="number">
+                </td>
+                <td>
+                    <input aria-label="Edit modifier" class="form-control" id="modifier" name="modifier"
+                        placeholder="Edit modifier" type="number">
+                </td>
+                <td>
+                    <input aria-label="Confirm charcter edits" id="edit" name="edit" type="hidden"
+                        value="{{ data.name }}">
+                    <button class="btn btn-outline-light" type="submit">Confirm Edits</button>
+                </td>
+            </tr>
+        </form>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% for data in char %}
+<form action="/removechar" method="post">
+    <input aria-label="Remove character" id="remove-char" name="remove-char" type="hidden" value="{{ data.name }}">
+    <button class="btn btn-outline-light" type="submit">Delete Character</button>
+</form>
+{% endfor %}
+{% endblock %}

@@ -65,6 +65,8 @@ Finally, to remove characters from battle, simply click the corresponding "X" bu
 
 If a user is logged out the `session` is cleared.
 
-## Video Demo
+## Links
 
-[Battle Tracker](https://youtu.be/LeWseRsh2qk)
+[Video Demo](https://youtu.be/LeWseRsh2qk)
+
+[Live Demo](http://lucashogg.pythonanywhere.com/)

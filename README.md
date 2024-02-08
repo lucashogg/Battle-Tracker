@@ -8,6 +8,12 @@ Welcome to Battle Tracker!
 
 Battle Tracker is a web app designed to assist the GM of a Dungeons and Dragons table top campaign. Battle Tracker will store unique characters or monsters each containing a few basic stats while keeping track of initiative in battles.
 
+## Links
+
+[Video Demo](https://youtu.be/LeWseRsh2qk)
+
+[Live Demo](http://lucashogg.pythonanywhere.com/)
+
 ## Features
 
 This project consists of utilizng [Flask](https://flask.palletsprojects.com/en/2.3.x/) in a [Python](https://www.python.org/) environment. All data is managed using [SQLite3](https://docs.python.org/3/library/sqlite3.html).
@@ -64,9 +70,3 @@ Finally, to remove characters from battle, simply click the corresponding "X" bu
 ### Logout
 
 If a user is logged out the `session` is cleared.
-
-## Links
-
-[Video Demo](https://youtu.be/LeWseRsh2qk)
-
-[Live Demo](http://lucashogg.pythonanywhere.com/)
